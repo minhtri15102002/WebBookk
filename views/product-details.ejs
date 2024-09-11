@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html>
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+
+
+<head>
+  <title>Trang web cho mượn sách</title>
+<style>
+  
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Thiết lập header và menu */
+header {
+  background-color: #f2f2f2;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+nav ul li {
+  margin-right: 10px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  padding: 10px;
+  color: #333;
+}
+
+.right-align {
+  margin-left: auto;
+}
+
+/* Thiết lập danh sách sách */
+.book-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.book {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-basis: calc(20% - 20px); /* Giả sử chiều rộng của mỗi sách là 20% và có margin 10px */
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 10px;
+}
+
+.book img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+
+.book-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.price-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  color: red;
+  font-size: 20px;
+}
+
+.rating {
+  color: gold;
+  font-size: 20px;
+}
+.book p{
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+.borrow-button {
+  align-self: center;
+  padding: 5px 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* Thiết lập footer */
+footer {
+  background-color: #f2f2f2;
+  padding: 10px;
+  text-align: center;
+}
+
+
+
+
+
+/* Thiết lập layout */
+
+.carousel-controls button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+
+
+.carousel-controls button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.carousel-item img {
+  
+  max-width: 100%;
+height: auto;
+  align-items: center;
+  justify-content: center;
+  object-fit: cover; /* Đảm bảo hình ảnh không bị bóp méo */
+  object-fit: contain;
+}
+
+.carousel-inner {
+    width: 300%;
+    height: 100%;
+    display: flex;
+    transition: transform 0.5s;
+  }
+
+
+
+.carousel-controls {
+  text-align: center; /* Căn giữa nút điều khiển */
+  margin-top: 10px; /* Khoảng cách giữa slide và thanh điều khiển */
+}
+
+.carousel-container {
+  width: 100%;
+  height: 200%;
+  overflow: hidden;
+}
+
+.h2{
+  text-align: center;
+  
+}
+
+.category-block {
+  background-color: #f2f2f2;
+  padding-top: 10px;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+.category-block h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.category-link {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.category-link li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.category-link li a {
+  text-decoration: none;
+  color: #333;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.category-link li a:hover {
+  background-color: #ccc;
+}
+
+
+
+
+    .list-item {
+display: flex;
+flex-wrap: wrap;
+}
+
+.category-item {
+flex: 0 0 25%;
+max-width: 25%;
+margin-bottom: 15px;
+}
+.category-block{
+  margin-left: 10px;
+
+  margin-top: 40px;
+  border-radius: 10px;
+}
+.category-block li{
+  margin-top: 10px;
+}
+  
+
+.navbar {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 20px 0;
+text-align: center;
+font-size: 16px;
+}
+
+.navbar-nav {
+display: flex;
+align-items: center;
+}
+
+.navbar-nav li {
+list-style: none;
+margin-left: 50px;
+ display: inline-block;
+position: relative;
+text-decoration: none;
+text-align: center;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar-nav li a {
+color: black;
+}
+
+.navbar-nav li a:hover {
+color: #3ca0e7;
+}
+
+.navbar-nav li:hover {
+cursor: pointer;
+}
+
+.submenu {
+margin-left: 40px ;
+margin-top: 10px;
+visibility: hidden;
+opacity: 0;
+position: absolute;
+left: 0;
+display: none;
+background: white;
+z-index: 1;
+}
+
+.navbar-nav li:hover > .submenu,
+.navbar-nav li .submenu:hover {
+visibility: visible;
+opacity: 1;
+display: block;
+min-width: 250px;
+text-align: left;
+padding-top: 20px;
+box-shadow: 0px 3px 5px -1px #ccc;
+left: 50%;
+transform: translateX(-50%);
+}
+
+.submenu li {
+clear: both;
+width: 100%;
+text-align: left;
+margin-left: 30px;
+margin-bottom: 20px;
+border-style: none;
+}
+
+.submenu li a:hover {
+padding-left: 10px;
+border-left: 2px solid #3ca0e7;
+transition: all 0.3s ease;
+}
+
+.search-bar {
+display: flex;
+align-items: center;
+margin-left: 10px; /* Thay đổi margin-left để tạo khoảng cách với menu */
+}
+
+.search-input-container {
+position: relative;
+display: flex;
+align-items: center;
+}
+
+.search-input-container input[type="text"] {
+width: 400px;
+padding: 10px;
+margin-right: 30px;
+border: none;
+border-radius: 10px;
+background-color: #f2f2f2;
+font-size: 16px;
+color: #333;
+box-sizing: border-box;
+}
+
+.search-input-container button {
+border: none;
+background-color: transparent;
+color: #333;
+font-size: 25px;
+margin-right: 200px;
+}
+/* footer section start */
+*{
+-webkit-box-sizing:border-box;
+-moz-box-sizing:border-box;
+-o-box-sizing:border-box;
+-ms-box-sizing:border-box;
+box-sizing:border-box;
+}
+body{
+font-size:14px;
+background: #fff;
+max-width:1920px;
+margin:0 auto;
+overflow-x:hidden;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+#footer {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 20px;
+}
+
+.logo-footer,
+.social-links,
+.useful-link,
+.address {
+
+padding: 20px;
+}
+.logo-footer img {
+max-width: 250px; /* Điều chỉnh kích thước tối đa của hình ảnh */
+height: auto; /* Giữ tỷ lệ khung hình */
+}
+
+.logo-footer {
+display: flex;
+align-items: center;
+}
+
+.nav-item img{
+max-width: 100px; /* Điều chỉnh kích thước tối đa của hình ảnh */
+height: auto;
+margin-top: -20px;
+margin-bottom: -25px;
+margin-left: -30px;
+}
+.logo-footer {
+grid-column: 1 / 2;
+}
+
+.social-links {
+grid-column: 2 / 3;
+}
+
+.useful-link {
+grid-column: 3 / 4;
+}
+
+.address {
+grid-column: 4 / 5;
+}
+
+.social-links h2,
+.useful-link h2,
+.address h2 {
+color: red;
+padding-bottom: 15px;
+font-size: 20px;
+font-weight: 600;
+}
+
+.social-icons {
+display: flex;
+flex-wrap: wrap;
+flex-direction: column;
+gap: 1rem;
+color: #777777;
+}
+
+.social-icons a {
+color: #777777;
+}
+
+.social-icons a:hover {
+color: #000;
+}
+
+.social-icons a i {
+box-shadow: rgb(0 0 0 / 8%) 0px 4px 12px;
+padding: 0.4rem 1rem 0.4rem 1rem;
+border-radius: 3px;
+color: #82074a;
+font-size: 16px;
+margin-right: 12px;
+}
+
+li {
+list-style: none;
+}
+
+.use-links {
+line-height: 32px;
+}
+
+.use-links li i {
+font-size: 14px;
+padding-right: 8px;
+color: #898989;
+}
+
+.use-links li a {
+color: #777777;
+}
+
+.use-links li a:hover {
+color: #000;
+}
+
+.address-links {
+line-height: 32px;
+color: #777777;
+}
+
+.copy-right-sec {
+padding: 1.8rem;
+background: #82074a;
+color: #fff;
+
+}
+
+
+#footer {
+background: #f7f7f7;
+padding: 3rem;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: flex-start;
+align-items: flex-start;
+}
+
+.row {
+flex: 1 0 100%;
+display: flex;
+justify-content: flex-start;
+align-items: flex-start;
+margin-bottom: 20px;
+}
+
+.logo-footer,
+.social-links,
+.useful-link,
+.address {
+flex: 1 0 auto;
+margin-right: 20px;
+}
+
+.logo-footer {
+max-width: 300px;
+}
+
+.social-links h2,
+.useful-link h2,
+.address h2 {
+padding-bottom: 15px;
+font-size: 20px;
+font-weight: 600;
+}
+
+.social-icons {
+display: flex;
+flex-wrap: wrap;
+flex-direction: column;
+gap: 1rem;
+color: #777777;
+}
+.social-links a,
+.use-links li {
+margin: 0;
+padding: 0;
+list-style: none;
+}
+
+.social-links a {
+display: flex;
+align-items: center;
+}
+
+.social-links a i,
+.use-links li i {
+margin-right: 5px;
+}
+
+.use-links li {
+display: flex;
+align-items: center;
+}
+
+.use-links li a {
+display: inline-block;
+vertical-align: middle;
+}
+.social-icons a {
+color: #777777;
+}
+
+.social-icons a:hover {
+color: #000;
+}
+
+.social-icons a i {
+box-shadow: rgb(0 0 0 / 8%) 0px 4px 12px;
+padding: 0.4rem 1rem 0.4rem 1rem;
+border-radius: 3px;
+color: #82074a;
+font-size: 16px;
+margin-right: 12px;
+}
+
+li {
+list-style: none;
+}
+
+.use-links {
+line-height: 32px;
+}
+
+.use-links li i {
+font-size: 14px;
+padding-right: 8px;
+color: #898989;
+}
+
+.use-links li a {
+color: #777777;
+}
+
+.use-links li a:hover {
+color: #000;
+}
+
+.address-links {
+line-height: 32px;
+color: #777777;
+}
+
+.copy-right-sec {
+padding: 1.8rem;
+background: #82074a;
+color: #fff;
+text-align: center;
+}
+
+.copy-right-sec a {
+color: #fcd462;
+font-weight: 500;
+}
+
+a {
+text-decoration: none;
+}
+.borrow-button {
+color: white;
+background-color: red;
+font-size: 16px;
+border: none;
+padding: 10px 20px;
+border-radius: 4px;
+
+}
+
+.cart-icon{
+display: inline-block;
+font-size: 25px;
+margin-left: 20px;
+margin-right: 20px;
+
+}
+.cart-icon button {
+background-color: transparent; 
+border: none; 
+cursor: pointer; 
+padding: 0; 
+font-size: 25px;
+}
+
+.top-bar {
+padding: 3px 0;
+font-size: 18px;
+    
+background: #f5f4f4;
+}
+
+.top-bar i {
+margin-left: 5px;
+}
+
+.top-bar .col-sm-6:first-child {
+text-align: left;
+}
+
+.top-bar .col-sm-6:last-child {
+  text-align: right;
+}
+
+@media (max-width: 575.98px) {
+.top-bar {
+    border-bottom: 1px solid rgba(242, 227, 227, 0.1);
+}
+
+.top-bar .col-sm-6:first-child,
+.top-bar .col-sm-6:last-child {
+    text-align: center;
+}
+}
+
+
+ul.breadcrumb {
+    
+    padding: 10px 16px;
+    list-style: none;
+    background-color: #eee;
+    margin-left: 10px;
+  }
+  ul.breadcrumb li {
+    
+    display: inline;
+    font-size: 18px;
+  }
+  ul.breadcrumb li+li:before {
+    padding: 8px;
+    color: black;
+    content: "/\00a0";
+  }
+  ul.breadcrumb li a {
+    color: #000000;
+    text-decoration: none;
+  }
+  
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.gallery {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.content {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.product-container-details {
+    padding: 20px;
+}
+
+.product-heading h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.product-gallery{
+    margin-left: 10px;
+}
+
+.wrapbox-detail{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.product-delivery {
+    border: none; 
+    background-color: #F9F9F9;
+    border-radius: 15px;
+    padding: 10px; 
+    width: 100%;
+    
+  }
+  
+  .infoList-deliverly {
+    list-style-type: none;
+    padding: 0; 
+  }
+  
+  .infoList-deliverly li {
+    display: flex; 
+    align-items: center; 
+    margin-bottom: 10px; 
+  }
+  
+  .infoList-deliverly li span {
+    margin-right: 10px; 
+  }
+  
+  .infoList-deliverly li img {
+    width: 30px; 
+    height: 25px;
+  }
+
+  .product-actions {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .select-actions {
+    display: flex; /* Sử dụng flexbox cho khối .select-actions */
+    align-items: center; /* Căn giữa các phần tử con theo chiều dọc */
+    justify-content: center; /* Căn giữa các phần tử con theo chiều ngang */
+  }
+  
+  
+  .qty-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    background-color: #f5f5f5;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .quantity-input {
+    width: 50px;
+    height: 40px;
+    text-align: center;
+    border: 1px solid #ccc;
+  }
+  
+  .addcart-area {
+    margin-left: 10px; /* Khoảng cách giữa khối .quantity-area và khối .addcart-area */
+  }
+  
+  .addcart-area button {
+    display: block;
+    width: 475px;
+    height: 40px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #ff0000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .addcart-area button:hover {
+    background-color: #cc0000;
+  }
+
+  .product-description {
+
+    margin-top: 10px;
+    padding: 20px;
+
+    height: 500px;
+    background-color: #f5f5f5;
+  }
+  
+  .title-bl {
+    margin-bottom: 10px;
+  }
+  
+  .title-bl h2 {
+    font-size: 24px;
+    color: red;
+    text-align: center;
+  }
+  
+  .description-content {
+    overflow: visible;
+  }
+  
+  .description-productdetail {
+    height: auto;
+  }
+  .description-productdetail p{
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .expandable-toggle .expandable-content_toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 40px;
+    margin: 0 auto;
+    font-size: 16px;
+    color: #fff;
+    background-color: #ff0000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .expandable-toggle .expandable-content_toggle-icon {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 8px;
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+    transform: rotate(45deg);
+  }
+  
+  .js_expandable_content.opened .expandable-content_toggle-icon {
+    transform: rotate(-135deg);
+  }
+  
+  .expandable-toggle .expandable-content_toggle-text {
+    font-weight: bold;
+  }
+  
+  .expandable-toggle .expandable-content_toggle:hover {
+    background-color: #cc0000;
+  }
+
+  .productRelated-title h2{
+    font-size: 40px;
+    text-align: center;
+  }
+
+  .gallery {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .gallery-image {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .product-heading {
+    margin-bottom: 10px;
+  }
+  
+  .product-heading h1 {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  .pro-soldold {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .pro-soldold strong {
+    color: red;
+  }
+  
+  .product-price {
+    font-size: 18px;
+  }
+  
+  .pro-price {
+    color: #ff0101;
+    font-style: italic;
+    font-size: 30px;
+    font-weight: bold;
+  }
+</style>
+</head>
+
+<body>
+
+
+  <header>
+    <nav class="navbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <img src="http://localhost:9090/logo.jpg">
+        </li>
+        <li class="nav-item">
+          <a href="/" class="nav-link">Trang chủ</a>
+        </li>
+        
+        <li class="nav-item">
+          <a href="/products/all" class="nav-link" style="width: 150%;">Danh mục sách</a>
+          <ul class="submenu">
+            <li><a href="/products/sach-kinh-doanh">Sách kinh doanh</a></li>
+            <li><a href="/products/sach-ky-nang">Sách kỹ năng</a></li>
+            <li><a href="/products/sach-tam-ly-hoc">Sách tâm lý học</a></li>
+            <li><a href="/products/sach-van-hoc">Tiểu thuyết/ Văn học</a></li>
+            <li><a href="/products/tai-chinh">Đầu tư tài chính</a></li>
+            <li><a href="/products/thieu-nhi">Thiếu nhi</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">GIỚI THIỆU</a>
+          <ul class="submenu">
+            <li><a href="/user/lien-he/">Về chúng tôi</a></li>
+            <li><a href="#">Tuyển dụng</a></li>
+            
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <div class="search-bar">
+      <div class="search-input-container">
+          <input type="text" id="search-input" placeholder="Search...">
+          <button id="search-btn" class="search-btn"><i class="fa fa-search"></i></button>
+      </div>
+      <nav>
+        <ul>
+          <h3 href="/user/profile"> <%= user.username %></h3>
+         
+          <div class="cart-icon" id="cartIcon">
+            <button onclick="redirectToCart()">
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            </button>
+          </div>
+          
+        </ul>
+      </nav>
+  </header>
+  
+  <main>
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="/products/all">Products</a></li>
+        <li><a href="/products/<%= encodeURIComponent(book.title) %>"> <%= book.title %></a></li>
+
+    </ul>
+
+    <section class="product-details">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6 col-md-12 col-12 gallery">
+              <div class="product-container-gallery">
+                <div class="wrapbox-image wrapbox-image-verticalSlide">
+                  <div class="product-gallery">
+                    <img src="http://localhost:9090/<%= book.img %>" alt="Book 4" class="gallery-image">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-12 content">
+              <div class="product-container-details">
+                <div class="wrapbox-detail">
+                  <div class="product-container-order">
+                    <div class="product-heading">
+                      <h1><%= book.title %></h1>
+                      <span class="pro-soldold">
+                        Tình trạng:
+                        <strong style="color: red">Còn hàng</strong>
+                      </span>
+                    </div>
+                    <div class="product-price">
+                      <span class="pro-price"> <%= book.price.toLocaleString('en-US')  %>₫</span>
+                    </div>
+                  </div>
+                  <div class="product-delivery">
+                    <ul class="infoList-deliverly">
+                      <li>
+                        <span>
+                          <img class="lazyloaded" data-src="//theme.hstatic.net/1000290493/1000909353/14/product_deliverly_1_ico.png?v=301" src="//theme.hstatic.net/1000290493/1000909353/14/product_deliverly_1_ico.png?v=301" alt="Cam kết 100% chính hãng">
+                        </span>
+                        Cam kết 100% chính hãng
+                      </li>
+                      <li>
+                        <span>
+                          <img class="lazyloaded" data-src="//theme.hstatic.net/1000290493/1000909353/14/product_deliverly_2_ico.png?v=301" src="//theme.hstatic.net/1000290493/1000909353/14/product_deliverly_2_ico.png?v=301" alt="Giao hàng dự kiến: Thứ 2 - Thứ 6 từ 9h00 - 17h00">
+                        </span>
+                        Giao hàng dự kiến: <br>
+                        <strong>Thứ 2 - Thứ 6 từ 9h00 - 17h00</strong>
+                      </li>
+                      <li>
+                        <span>
+                          <img class="lazyloaded" data-src="//theme.hstatic.net/1000290493/1000909353/14/product_deliverly_3_ico.png?v=301" src="//theme.hstatic.net/1000290493/1000909353/14/product_deliverly_3_ico.png?v=301" alt="Hỗ trợ 24/7 Với các kênh chat, email &amp; phone">
+                        </span>
+                        Hỗ trợ 24/7<br>
+                        Với các kênh chat, email &amp; phone
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="product-actions">
+                    <div class="select-actions d-none d-lg-block clearfix">
+                      <div class="quantity-area">
+                        <input type="button" value="-" onclick="HRT.All.minusQuantity()" class="qty-btn">
+                        <input type="text" id="quantity" name="quantity" value="1" min="1" class="quantity-input">
+                        <input type="button" value="+" onclick="HRT.All.plusQuantity()" class="qty-btn">
+                      </div>
+                      <form id="addToCartForm" method="post" action="/products/ <%= encodeURIComponent(book.title) %>">
+                        <input type="hidden" id="productId" name="productId" value="<%= book.book_id %>">
+                        <input type="hidden" id="userId" name="userId" value="<%= user.user_id %>">
+                        <input type="hidden" id="productTitle" name="productTitle" value="<%= book.title %>">
+                        <input type="hidden" id="productQuanity" name="productQuanity" value="1" min="1" class="quantity-input">
+                        <div class="addcart-area">
+                            <button type="button" id="addToCartButton" class="disabled add-to-cartProduct button dark btn-addtocart btnred addtocart-modal" name="add">Đặt hàng</button>
+                        </div>
+                    </form>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="product-description">	
+                    <div class="title-bl">
+                        <h2>Mô tả</h2>
+                    </div>							
+                    <div class="description-content expandable-toggle opened">
+                        <div class="description-productdetail" style="height: 130px;">
+                            <p><%= book.other_book_info %></p>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="productdeatil-related">
+        <div class="container">
+            <div class="productRelated-title">
+                <h2>Sản phẩm liên quan</h2>
+            </div>
+            <div class="productRelated-content">
+              <section class="book-list">
+                <% let count1 = 0; %>
+                <% relatedBooks.forEach((relatedBooks) => { %>
+                  <% if (count1 < 63) { %>
+                    <div class="book">
+                      <div class="book-image">
+                        <a href="/products/<%= encodeURIComponent(relatedBooks.title) %>">
+                          <img src="http://localhost:9090/<%= relatedBooks.img %>" alt="Book Image">
+                        </a>
+                      </div>
+                      <div class="book-info">
+                        <h3><%= relatedBooks.title %> - <%= relatedBooks.author %></h3>
+                        <p style="color: red; font-size: 20px;"><%= relatedBooks.price.toLocaleString('en-US')  %>₫</p>
+                        <p class="rating">★★★★★</p>
+                        <a href="/products/<%= encodeURIComponent(relatedBooks.title) %>" class="borrow-button">Mua ngay</a>
+                      </div>
+                    </div>
+                    <% count1++; %>
+                  <% } %>
+                <% }) %>
+              </section>
+            </div>
+        </div>
+      </section>
+  </main>
+
+  <footer id="footer">
+    <div class="logo-footer">
+      <div class="logo">
+        <a href="http://localhost:9090/">
+            <img src="http://localhost:9090/logo.jpg">
+        </a>
+    </div>
+    </div>
+    <div class="social-links">
+      <h2>Mạng xã hội</h2>
+      <div class="social-icons">
+        <a href="#"><i class="fa fa-facebook"></i> Facebook</a>
+        <a href="#"><i class="fa fa-twitter"></i> Twitter</a>
+        <a href="#"><i class="fa fa-instagram"></i>Instargram</a>
+        <!-- Thêm các biểu tượng mạng xã hội khác nếu cần -->
+      </div>
+    </div>
+    <div class="useful-link">
+      <h2>DANH MỤC</h2>
+      <ul class="use-links">
+        <li><i class="fa fa-angle-right"></i><a href="#">Về chúng tôi</a></li>
+        <li><i class="fa fa-angle-right"></i><a href="#">Chính sách bảo mật</a></li>
+        <li><i class="fa fa-angle-right"></i><a href="#">Điều khoản sử dụng</a></li>
+        <!-- Thêm các liên kết khác nếu cần -->
+      </ul>
+    </div>
+    <div class="address">
+      <h2>Địa chỉ</h2>
+      <ul class="address-links">
+        <li><i class="fa fa-map-marker"></i><span class="address1">123 Đường ABC, Thành phố XYZ</span></li>
+        <li><i class="fa fa-phone"></i><a href="tel:123-456-7890">123-456-7890</a></li>
+        <li><i class="fa fa-envelope"></i><a href="mailto:info@yourwebsite.com">info@yourwebsite.com</a></li>
+        <!-- Thêm các liên kết địa chỉ khác nếu cần -->
+      </ul>
+    </div>
+  </footer>
+
+  
+  <script>
+
+    //Search-bar
+
+    $(document).ready(function() {
+      $('#search-btn').click(function() {
+        search();
+      });
+    
+      $('#search-input').keypress(function(event) {
+        if (event.which === 13) {
+          search();
+        }
+      });
+    
+      function search() {
+        var keyword = $('#search-input').val();
+        // check if it includes the 'book:' keyword
+        if (keyword.includes('book:')) {
+          // extract book title from the search query
+          var index = keyword.indexOf('book:') + 5;
+          var bookTitle = keyword.substring(index);
+          window.location.href = '/products/search?book=' + encodeURIComponent(bookTitle);
+        } else {
+        
+          window.location.href = '/products/search?keyword=' + encodeURIComponent(keyword);
+        }
+      }
+    });
+    
+    function redirectToCart() {
+      window.location.href = "/user/gio-hang";
+    }
+
+    document.getElementById("addToCartButton").addEventListener("click", function() {
+      // Lấy dữ liệu từ các trường input
+      var productId = document.getElementById("productId").value;
+      var userId = document.getElementById("userId").value;
+      var title = document.getElementById("productTitle").value; // Lấy giá trị của tiêu đề sách
+      var quanity = document.getElementById("productQuanity").value; // Lấy giá trị của số lượng sách
+      // Tạo đối tượng dữ liệu để gửi
+      var data = {
+          productId: productId,
+          userId: userId,
+          title: title, // Thêm tiêu đề vào dữ liệu
+          quanity: quanity // Thêm số lượng vào dữ liệu
+      };
+  
+      console.log(data);
+  
+      // Gửi yêu cầu POST
+      fetch(`/products/${encodeURIComponent(title)}`, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+      })
+      .then(response => {
+          if (response.ok) {
+              alert("Sản phẩm đã được thêm vào giỏ hàng!");
+              console.log("Thêm vào giỏ hàng thành công!");
+          } else {
+              console.error("Đã xảy ra lỗi khi thêm vào giỏ hàng.");
+          }
+      })
+      .catch(error => {
+          console.error("Đã xảy ra lỗi:", error);
+      });
+  });
+  
+
+    $(document).ready(function () {
+      function nextSlide() {
+        var $carouselInner = $(".carousel-inner");
+        $carouselInner.animate(
+          { marginLeft: "-33.33%" },
+          1000,
+          function () {
+            $carouselInner.css("margin-left", "0");
+            $(".carousel-item:first").appendTo($carouselInner);
+          }
+        );
+      }
+
+      setInterval(nextSlide, 3000);
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+  var searchBtn = document.getElementById("search-btn");
+  var searchInput = document.getElementById("search-input");
+  
+  searchBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+    performSearch();
+  });
+  
+  searchInput.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      performSearch();
+    }
+  });
+  
+  function performSearch() {
+    var searchTerm = searchInput.value;
+    console.log("Tìm kiếm: " + searchTerm);
+    // Thực hiện các hành động tìm kiếm khác tại đây
+    }
+  });
+  const cartButton = document.getElementById('cartIcon');
+  cartButton.addEventListener('click', () => {
+    console.log('Nút giỏ hàng được bấm!');
+  });
+
+  const navbarToggle = document.querySelector('.navbar-toggle');
+  const navbarMenu = document.querySelector('.navbar-nav');
+
+  navbarToggle.addEventListener('click', () => {
+    navbarMenu.classList.toggle('active');
+  });
+
+  
+  
+  
+  </script>
+</body>
+</html>

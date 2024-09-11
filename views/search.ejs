@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html>
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+
+
+<head>
+  <title>Trang web cho mượn sách</title>
+<style>
+  
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Thiết lập header và menu */
+header {
+  background-color: #f2f2f2;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+nav ul li {
+  margin-right: 10px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  padding: 10px;
+  color: #333;
+}
+
+.right-align {
+  margin-left: auto;
+}
+
+/* Thiết lập danh sách sách */
+.main1 {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+.book-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.book {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 250px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 10px;
+}
+
+.book img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+
+.book-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.price-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  color: red;
+  font-size: 20px;
+}
+
+.rating {
+  color: gold;
+  font-size: 20px;
+}
+.book p{
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+.borrow-button {
+  align-self: center;
+  padding: 5px 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* Thiết lập footer */
+footer {
+  background-color: #f2f2f2;
+  padding: 10px;
+  text-align: center;
+  font-size: 15px;
+}
+
+
+
+
+
+/* Thiết lập layout */
+
+.carousel-controls button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* Thiết lập layout */
+
+
+
+.carousel-controls button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.carousel-item img {
+  
+  max-width: 100%;
+height: auto;
+  align-items: center;
+  justify-content: center;
+  object-fit: cover; /* Đảm bảo hình ảnh không bị bóp méo */
+  object-fit: contain;
+}
+
+.carousel-inner {
+    width: 300%;
+    height: 100%;
+    display: flex;
+    transition: transform 0.5s;
+  }
+
+
+
+.carousel-controls {
+  text-align: center; /* Căn giữa nút điều khiển */
+  margin-top: 10px; /* Khoảng cách giữa slide và thanh điều khiển */
+}
+
+.carousel-container {
+  width: 100%;
+  height: 200%;
+  overflow: hidden;
+}
+
+.h2{
+  text-align: center;
+  
+}
+
+.category-block {
+  background-color: #f2f2f2;
+  padding-top: 10px;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+.category-block h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.category-link {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.category-link li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.category-link li a {
+  text-decoration: none;
+  color: #333;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.category-link li a:hover {
+  background-color: #ccc;
+}
+
+
+
+
+    .list-item {
+display: flex;
+flex-wrap: wrap;
+}
+
+.category-item {
+flex: 0 0 25%;
+max-width: 25%;
+margin-bottom: 15px;
+}
+.category-block{
+  margin-left: 10px;
+
+  margin-top: 40px;
+  border-radius: 10px;
+}
+.category-block li{
+  margin-top: 10px;
+}
+  
+
+.navbar {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 20px 0;
+text-align: center;
+font-size: 13px;
+}
+
+.navbar-nav {
+display: flex;
+align-items: center;
+}
+
+.navbar-nav li {
+list-style: none;
+margin-left: 50px;
+ display: inline-block;
+position: relative;
+text-decoration: none;
+text-align: center;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar-nav li a {
+color: black;
+}
+
+.navbar-nav li a:hover {
+color: #3ca0e7;
+}
+
+.navbar-nav li:hover {
+cursor: pointer;
+}
+
+.submenu {
+margin-left: 40px ;
+margin-top: 10px;
+visibility: hidden;
+opacity: 0;
+position: absolute;
+left: 0;
+display: none;
+background: white;
+z-index: 1;
+}
+
+.navbar-nav li:hover > .submenu,
+.navbar-nav li .submenu:hover {
+visibility: visible;
+opacity: 1;
+display: block;
+min-width: 250px;
+text-align: left;
+padding-top: 20px;
+box-shadow: 0px 3px 5px -1px #ccc;
+left: 50%;
+transform: translateX(-50%);
+}
+
+.submenu li {
+clear: both;
+width: 100%;
+text-align: left;
+margin-left: 30px;
+margin-bottom: 20px;
+border-style: none;
+}
+
+.submenu li a:hover {
+padding-left: 10px;
+border-left: 2px solid #3ca0e7;
+transition: all 0.3s ease;
+}
+
+.search-bar {
+display: flex;
+align-items: center;
+margin-left: 10px; /* Thay đổi margin-left để tạo khoảng cách với menu */
+}
+
+.search-input-container {
+position: relative;
+display: flex;
+align-items: center;
+}
+
+.search-input-container input[type="text"] {
+width: 400px;
+padding: 10px;
+margin-right: 30px;
+border: none;
+border-radius: 10px;
+background-color: #f2f2f2;
+font-size: 16px;
+color: #333;
+box-sizing: border-box;
+}
+.search-bar h3{
+    font-size: 16px;
+}
+.search-input-container button {
+border: none;
+background-color: transparent;
+color: #333;
+font-size: 25px;
+margin-right: 200px;
+}
+/* footer section start */
+*{
+-webkit-box-sizing:border-box;
+-moz-box-sizing:border-box;
+-o-box-sizing:border-box;
+-ms-box-sizing:border-box;
+box-sizing:border-box;
+}
+body{
+font-size:14px;
+background: #fff;
+max-width:1920px;
+margin:0 auto;
+overflow-x:hidden;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+#footer {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 20px;
+}
+
+.logo-footer,
+.social-links,
+.useful-link,
+.address {
+
+padding: 20px;
+}
+.logo-footer img {
+max-width: 250px; /* Điều chỉnh kích thước tối đa của hình ảnh */
+height: auto; /* Giữ tỷ lệ khung hình */
+}
+
+.logo-footer {
+display: flex;
+align-items: center;
+}
+
+.nav-item img{
+max-width: 100px; /* Điều chỉnh kích thước tối đa của hình ảnh */
+height: auto;
+margin-top: -20px;
+margin-bottom: -25px;
+margin-left: -30px;
+}
+.logo-footer {
+grid-column: 1 / 2;
+}
+
+.social-links {
+grid-column: 2 / 3;
+}
+
+.useful-link {
+grid-column: 3 / 4;
+}
+
+.address {
+grid-column: 4 / 5;
+}
+
+.social-links h2,
+.useful-link h2,
+.address h2 {
+color: red;
+padding-bottom: 15px;
+font-size: 20px;
+font-weight: 600;
+}
+
+.social-icons {
+display: flex;
+flex-wrap: wrap;
+flex-direction: column;
+gap: 1rem;
+color: #777777;
+}
+
+.social-icons a {
+color: #777777;
+}
+
+.social-icons a:hover {
+color: #000;
+}
+
+.social-icons a i {
+box-shadow: rgb(0 0 0 / 8%) 0px 4px 12px;
+padding: 0.4rem 1rem 0.4rem 1rem;
+border-radius: 3px;
+color: #82074a;
+font-size: 16px;
+margin-right: 12px;
+}
+
+li {
+list-style: none;
+}
+
+.use-links {
+line-height: 32px;
+}
+
+.use-links li i {
+font-size: 14px;
+padding-right: 8px;
+color: #898989;
+}
+
+.use-links li a {
+color: #777777;
+}
+
+.use-links li a:hover {
+color: #000;
+}
+
+.address-links {
+line-height: 32px;
+color: #777777;
+}
+
+.copy-right-sec {
+padding: 1.8rem;
+background: #82074a;
+color: #fff;
+
+}
+
+
+#footer {
+background: #f7f7f7;
+padding: 3rem;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: flex-start;
+align-items: flex-start;
+}
+
+.row {
+flex: 1 0 100%;
+display: flex;
+justify-content: flex-start;
+align-items: flex-start;
+margin-bottom: 20px;
+}
+
+.logo-footer,
+.social-links,
+.useful-link,
+.address {
+flex: 1 0 auto;
+margin-right: 20px;
+}
+
+.logo-footer {
+max-width: 300px;
+}
+
+.social-links h2,
+.useful-link h2,
+.address h2 {
+padding-bottom: 15px;
+font-size: 20px;
+font-weight: 600;
+}
+
+.social-icons {
+display: flex;
+flex-wrap: wrap;
+flex-direction: column;
+gap: 1rem;
+color: #777777;
+}
+.social-links a,
+.use-links li {
+margin: 0;
+padding: 0;
+list-style: none;
+}
+
+.social-links a {
+display: flex;
+align-items: center;
+}
+
+.social-links a i,
+.use-links li i {
+margin-right: 5px;
+}
+
+.use-links li {
+display: flex;
+align-items: center;
+}
+
+.use-links li a {
+display: inline-block;
+vertical-align: middle;
+}
+.social-icons a {
+color: #777777;
+}
+
+.social-icons a:hover {
+color: #000;
+}
+
+.social-icons a i {
+box-shadow: rgb(0 0 0 / 8%) 0px 4px 12px;
+padding: 0.4rem 1rem 0.4rem 1rem;
+border-radius: 3px;
+color: #82074a;
+font-size: 16px;
+margin-right: 12px;
+}
+
+li {
+list-style: none;
+}
+
+.use-links {
+line-height: 32px;
+}
+
+.use-links li i {
+font-size: 14px;
+padding-right: 8px;
+color: #898989;
+}
+
+.use-links li a {
+color: #777777;
+}
+
+.use-links li a:hover {
+color: #000;
+}
+
+.address-links {
+line-height: 32px;
+color: #777777;
+}
+
+.copy-right-sec {
+padding: 1.8rem;
+background: #82074a;
+color: #fff;
+text-align: center;
+}
+
+.copy-right-sec a {
+color: #fcd462;
+font-weight: 500;
+}
+
+a {
+text-decoration: none;
+}
+.borrow-button {
+color: white;
+background-color: red;
+font-size: 16px;
+border: none;
+padding: 10px 20px;
+border-radius: 4px;
+
+}
+
+.cart-icon{
+display: inline-block;
+font-size: 25px;
+margin-left: 20px;
+margin-right: 20px;
+
+}
+.cart-icon button {
+background-color: transparent; 
+border: none; 
+cursor: pointer; 
+padding: 0; 
+font-size: 25px;
+}
+
+.top-bar {
+padding: 3px 0;
+font-size: 25px;
+color: #FF6F61;
+background: #f5f4f4;
+}
+
+.top-bar i {
+margin-left: 5px;
+}
+
+.top-bar .col-sm-6:first-child {
+text-align: left;
+}
+
+.top-bar .col-sm-6:last-child {
+  text-align: right;
+}
+
+@media (max-width: 575.98px) {
+.top-bar {
+    border-bottom: 1px solid rgba(242, 227, 227, 0.1);
+}
+
+.top-bar .col-sm-6:first-child,
+.top-bar .col-sm-6:last-child {
+    text-align: center;
+}
+}
+
+ul.breadcrumb {
+    
+    padding: 10px 16px;
+    list-style: none;
+    background-color: #eee;
+    margin-left: 10px;
+  }
+  ul.breadcrumb li {
+    
+    display: inline;
+    font-size: 18px;
+  }
+  ul.breadcrumb li+li:before {
+    padding: 8px;
+    color: black;
+    content: "/\00a0";
+  }
+  ul.breadcrumb li a {
+    color: #000000;
+    text-decoration: none;
+  }
+
+  .collection-filter {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.filter_group {
+    margin-bottom: 10px;
+    width: 300px;
+}
+
+.group-menu {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.filter_group-subtitle {
+    background-color: #f9f9f9;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+}
+
+.filter_group-subtitle .icon-control {
+    font-size: 14px;
+}
+
+.filter_group-content {
+    padding: 10px;
+    
+}
+
+.layered-content {
+    margin-left: 0px;
+}
+
+.tree-menu li {
+    list-style: none;
+    
+    margin-bottom: 5px;
+}
+
+.tree-menu li a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 16px;
+}
+
+.tree-menu li a:hover {
+    color: #ff8800;
+}
+
+.tree-menu li span {
+    display: none;
+    width: 10px;
+    height: 10px;
+    background-color: #333;
+    border-radius: 50%;
+    margin-right: 0px;
+
+}
+
+.filter_group-content.filter-price {
+    border: 1px solid #ddd;
+}
+
+.filter-price .checkbox-list {
+    padding-left: 0;
+    list-style: none;
+}
+
+.filter-price .checkbox-list li {
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.filter-price .checkbox-list input[type="checkbox"] {
+    display: none;
+}
+
+.filter-price .checkbox-list label {
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+}
+
+.filter-price .checkbox-list label:before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.filter-price .checkbox-list label span {
+    margin-left: 5px;
+}
+
+.filter-price .checkbox-list input[type="checkbox"]:checked + label:before {
+    background-color: #ff8800;
+    border-color: #ff8800;
+}
+
+.collection-loadmore {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+.btn-loadmore {
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid #ff0000;
+    border-radius: 15px;
+    box-sizing: border-box;
+    color: #ff0000;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    min-height: 60px;
+    min-width: 0;
+    outline: none;
+    padding: 16px 24px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    will-change: transform;
+  }
+  
+  .btn-loadmore:disabled {
+    pointer-events: none;
+  }
+  
+  .btn-loadmore:hover {
+    color: #ffffffc2;
+    background-color: #cb0202;
+    box-shadow: rgba(110, 4, 4, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+  }
+  
+  .btn-loadmore:active {
+    box-shadow: none;
+    transform: translateY(0);
+  }
+</style>
+</head>
+
+<body>
+  <!-- Top bar Start -->
+  <div class="top-bar">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <i class="fa fa-envelope"></i> admin@gmail.com
+            </div>
+            <div class="col-sm-6">
+                <i class="fa fa-phone-alt"></i> +0123456789
+        </div>
+    </div>
+  </div>
+<!-- Top bar End -->
+
+  <header>
+    <nav class="navbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <img src="http://localhost:9090/logo.jpg">
+        </li>
+        <li class="nav-item">
+          <a href="/" class="nav-link">Trang chủ</a>
+        </li>
+        
+        <li class="nav-item">
+          <a href="/products/all" class="nav-link" style="width: 150%;">Danh mục sách</a>
+          <ul class="submenu">
+            <li><a href="/products/sach-kinh-doanh">Sách kinh doanh</a></li>
+            <li><a href="/products/sach-ky-nang">Sách kỹ năng</a></li>
+            <li><a href="/products/sach-tam-ly-hoc">Sách tâm lý học</a></li>
+            <li><a href="/products/sach-van-hoc">Tiểu thuyết/ Văn học</a></li>
+            <li><a href="/products/tai-chinh">Đầu tư tài chính</a></li>
+            <li><a href="/products/thieu-nhi">Thiếu nhi</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">GIỚI THIỆU</a>
+          <ul class="submenu">
+            <li><a href="/user/lien-he/">Về chúng tôi</a></li>
+            <li><a href="#">Tuyển dụng</a></li>
+            
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <div class="search-bar">
+      <div class="search-input-container">
+          <input type="text" id="search-input" placeholder="Search...">
+          <button id="search-btn" class="search-btn"><i class="fa fa-search"></i></button>
+      </div>
+      <nav>
+        <ul>
+          <a href="/user/profile">
+            <h3 > <%=  user.username %></h3>
+          </a>
+         
+          <div class="cart-icon" id="cartIcon">
+            <button onclick="redirectToCart()">
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            </button>
+          </div>
+          
+        </ul>
+      </nav>
+  </header>
+  
+  <main>
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="/products/all">Products</a></li>
+        
+    </ul>
+
+    <div class="main-conntent">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-12 col-12 collection-filter">
+                    <div class="filter_group" aria-expanded="false">
+                        <div class="group-menu filter_group_block">
+                            <div class="filter_group-subtitle">
+                                <span>Danh mục sản phẩm</span>
+                                <span class="icon-control"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                            </div>
+                            <div class="filter_group-content layered-category">
+                                <div class="layered-content">
+                                    <ul class="tree-menu">
+                                        <li>
+                                            <span></span>
+                                            <a class="" href="/products/sach-kinh-doanh" title="Sách Kinh Doanh" target="_self">
+                                                Sách Kinh Doanh
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <span></span>
+                                            <a class="" href="/products/sach-tam-ly-hoc" title="Sách Tâm Lý Học" target="_self">
+                                                Sách Tâm Lý Học
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <span></span>
+                                            <a class="" href="/products/sach-van-hoc" title="Sách Văn Học - Tiểu Thuyết" target="_self">
+                                                Sách Văn Học - Tiểu Thuyết
+                                            </a>
+                                        </li>
+                                        
+                                        <li>
+                                            <span></span>
+                                            <a class="" href="/products/sach-ky-nang" title="Booflife - Phong cách sống" target="_self">
+                                                Sách kỹ năng
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <span></span>
+                                            <a class="" href="/products/tai-chinh" title="Đầu tư - Tài chính" target="_self">
+                                                Đầu tư - Tài chính
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <span></span>
+                                            <a class="" href="/products/thieu-nhi" title="Thiếu Nhi" target="_self">
+                                                Thiếu Nhi
+                                            </a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter_group" aria-expanded="false">
+                        <div class="filter_group_block">
+                            <div class="filter_group-subtitle">
+                                <span>Lọc giá</span>
+                                <span class="icon-control"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                            </div>
+                            <div class="filter_group-content filter-price">
+                                <ul class="checkbox-list">
+                                    <li>
+                                        <input type="checkbox" id="p1" name="cc" data-min-price="0" data-max-price="100000">
+                                        <label for="p1">
+                                            <span>Dưới</span> 100.000₫
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="p2" name="cc" data-min-price="100000" data-max-price="200000">
+                                        <label for="p2">
+                                            100.000₫ - 200.000₫
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="p3" name="cc" data-min-price="200000" data-max-price="300000">
+                                        <label for="p3">
+                                            200.000₫ - 300.000₫
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="p4" name="cc" data-min-price="300000" data-max-price="400000">
+                                        <label for="p4">
+                                            300.000₫ - 400.000₫
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="p5" name="cc" data-min-price="400000" data-max-price="">
+                                        <label for="p5">
+                                            <span>Trên</span> 400.000₫
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter_group" aria-expanded="false">
+                      <div class="filter_group-subtitle">
+                        <span>Sắp xếp</span>
+                        <span class="icon-control"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                      </div>
+  
+                      <div class="filter_group-content filter-book">
+                        <ul class="checkbox-list">
+                            <li>
+                                <input type="checkbox" id="ascending" name="sort" value="ascending" data-min-price="0" data-max-price="500000">
+                                <label for="ascending">
+                                    <span>Giá tăng dần</span> 
+                                </label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="descending" name="sort" value="descending" data-min-price="0" data-max-price="500000" >
+                                <label for="descending">
+                                    <span>Giá giảm dần</span>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-9 col-md-12 col-12 collection-content">
+                    <h3>Tất cả sản phẩm</h3>
+                    <div class="main1">
+                        <section class="book-list">
+                            <% let count1 = 0; %>
+                            <% books.forEach((book) => { %>
+                              <% if (count1 < 63) { %>
+                                <div class="book">
+                                  <div class="book-image">
+                                    <a href="/products/<%= encodeURIComponent(book.title) %>">
+                                      <img src="http://localhost:9090/<%= book.img %>" alt="Book Image">
+                                    </a>
+                                  </div>
+                                  <div class="book-info">
+                                    <h3><%= book.title %> - <%= book.author %></h3>
+                                    <p style="color: red; font-size: 20px;"><%= book.price.toLocaleString('en-US') %>₫</p>
+                                    <p class="rating">★★★★★</p>
+                                    <a href="/products/<%= encodeURIComponent(book.title) %>" class="borrow-button">Mua ngay</a>
+                                  </div>
+                                </div>
+                                <% count1++; %>
+                              <% } %>
+                            <% }) %>
+                          </section>
+                    </div>
+                    <div class="collection-loadmore">
+                        <a class="button btn-loadmore" id="loadMoreButton">Xem thêm sản phẩm</a>
+                    </div>
+                </div>
+                
+            </div>
+            
+
+        </div>
+    </div>
+  </main>
+
+  <footer id="footer">
+    <div class="logo-footer">
+      <div class="logo">
+        <a href="http://localhost:9090/">
+            <img src="http://localhost:9090/logo.jpg">
+        </a>
+    </div>
+    </div>
+    <div class="social-links">
+      <h2>Mạng xã hội</h2>
+      <div class="social-icons">
+        <a href="#"><i class="fa fa-facebook"></i> Facebook</a>
+        <a href="#"><i class="fa fa-twitter"></i> Twitter</a>
+        <a href="#"><i class="fa fa-instagram"></i>Instargram</a>
+        <!-- Thêm các biểu tượng mạng xã hội khác nếu cần -->
+      </div>
+    </div>
+    <div class="useful-link">
+      <h2>DANH MỤC</h2>
+      <ul class="use-links">
+        <li><i class="fa fa-angle-right"></i><a href="#">Về chúng tôi</a></li>
+        <li><i class="fa fa-angle-right"></i><a href="#">Chính sách bảo mật</a></li>
+        <li><i class="fa fa-angle-right"></i><a href="#">Điều khoản sử dụng</a></li>
+        <!-- Thêm các liên kết khác nếu cần -->
+      </ul>
+    </div>
+    <div class="address">
+      <h2>Địa chỉ</h2>
+      <ul class="address-links">
+        <li><i class="fa fa-map-marker"></i><span class="address1">123 Đường ABC, Thành phố XYZ</span></li>
+        <li><i class="fa fa-phone"></i><a href="tel:123-456-7890">123-456-7890</a></li>
+        <li><i class="fa fa-envelope"></i><a href="mailto:info@yourwebsite.com">info@yourwebsite.com</a></li>
+        <!-- Thêm các liên kết địa chỉ khác nếu cần -->
+      </ul>
+    </div>
+  </footer>
+
+  
+  <script>
+    var sortCheckboxes = document.querySelectorAll('input[name="sort"]');
+    sortCheckboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            sortItemsByPrice();
+        });
+    });
+
+  function sortItemsByPrice() {
+    var sortCheckboxes = document.getElementsByName('sort');
+    var minPrice, maxPrice;
+    var sortType;
+
+    // Lặp qua tất cả các checkbox sắp xếp
+    sortCheckboxes.forEach(function (checkbox) {
+        if (checkbox.checked) {
+            // Lấy giá trị min và max từ thuộc tính data của checkbox được chọn
+            minPrice = parseInt(checkbox.getAttribute('data-min-price'));
+            maxPrice = parseInt(checkbox.getAttribute('data-max-price'));
+            // Lấy giá trị sắp xếp từ thuộc tính value của checkbox được chọn
+            sortType = checkbox.value;
+        }
+    });
+
+    // Lọc sản phẩm theo giá
+    var books = document.getElementsByClassName('book');
+    var booksArray = Array.from(books);
+
+    var filteredBooks = booksArray.filter(function (book) {
+        var priceElement = book.querySelector('.book-info p');
+        var price = parseInt(priceElement.innerText.replace('₫', '').replace(',', ''));
+
+        if (minPrice && maxPrice) {
+            return price >= minPrice && price <= maxPrice;
+        } else if (minPrice && !maxPrice) {
+            return price >= minPrice;
+        } else if (!minPrice && maxPrice) {
+            return price <= maxPrice;
+        } else {
+            return true;
+        }
+    });
+
+    // Sắp xếp mảng các phần tử theo giá
+    if (sortType === 'ascending') {
+        filteredBooks.sort(function (a, b) {
+            var priceA = parseInt(a.querySelector('.book-info p').innerText.replace('₫', '').replace(',', ''));
+            var priceB = parseInt(b.querySelector('.book-info p').innerText.replace('₫', '').replace(',', ''));
+            return priceA - priceB;
+        });
+    } else if (sortType === 'descending') {
+        filteredBooks.sort(function (a, b) {
+            var priceA = parseInt(a.querySelector('.book-info p').innerText.replace('₫', '').replace(',', ''));
+            var priceB = parseInt(b.querySelector('.book-info p').innerText.replace('₫', '').replace(',', ''));
+            return priceB - priceA;
+        });
+    }
+
+    // Xóa các phần tử hiện tại
+    while (books[0]) {
+        books[0].parentNode.removeChild(books[0]);
+    }
+
+    // Thêm lại các phần tử đã được lọc và sắp xếp vào danh sách
+    filteredBooks.forEach(function (book) {
+        document.querySelector('.book-list').appendChild(book);
+    });
+}
+    
+    var checkboxes = document.querySelectorAll('input[name="cc"]');
+    checkboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            filterPrice();
+        });
+    });
+
+    function filterPrice() {
+      var checkboxes = document.getElementsByName('cc');
+      var minPrice, maxPrice;
+    
+      // Lặp qua tất cả các checkbox lọc giá
+      checkboxes.forEach(function(checkbox) {
+          if (checkbox.checked) {
+              // Lấy giá trị min và max từ data attribute của checkbox được chọn
+              minPrice = parseInt(checkbox.getAttribute('data-min-price'));
+              maxPrice = parseInt(checkbox.getAttribute('data-max-price'));
+          }
+      });
+    
+      // Lọc sản phẩm theo giá
+      var books = document.getElementsByClassName('book');
+      for (var i = 0; i < books.length; i++) {
+          var book = books[i];
+          var priceElement = book.querySelector('.book-info p');
+          var price = parseInt(priceElement.innerText.replace('₫', '').replace(',', ''));
+        
+          // Kiểm tra giá của sách và ẩn/hiển thị tùy theo giá trị min và max
+          if (minPrice && maxPrice) {
+              if (price >= minPrice && price <= maxPrice) {
+                  book.style.display = 'block';
+              } else {
+                  book.style.display = 'none';
+              }
+          } else if (minPrice && !maxPrice) {
+              if (price >= minPrice) {
+                  book.style.display = 'block';
+              } else {
+                  book.style.display = 'none';
+              }
+          } else if (!minPrice && maxPrice) {
+              if (price <= maxPrice) {
+                  book.style.display = 'block';
+              } else {
+                  book.style.display = 'none';
+              }
+          } else {
+              book.style.display = 'block';
+          }
+      }
+  }
+    
+    //Search-bar
+
+    $(document).ready(function() {
+      $('#search-btn').click(function() {
+        search();
+      });
+    
+      $('#search-input').keypress(function(event) {
+        if (event.which === 13) {
+          search();
+        }
+      });
+    
+      function search() {
+        var keyword = $('#search-input').val();
+        // check if it includes the 'book:' keyword
+        if (keyword.includes('book:')) {
+          // extract book title from the search query
+          var index = keyword.indexOf('book:') + 5;
+          var bookTitle = keyword.substring(index);
+          window.location.href = '/products/search?book=' + encodeURIComponent(bookTitle);
+        } else {
+        
+          window.location.href = '/products/search?keyword=' + encodeURIComponent(keyword);
+        }
+      }
+    });
+
+    function redirectToCart() {
+      window.location.href = "/user/gio-hang";
+    }
+    $(document).ready(function () {
+      function nextSlide() {
+        var $carouselInner = $(".carousel-inner");
+        $carouselInner.animate(
+          { marginLeft: "-33.33%" },
+          1000,
+          function () {
+            $carouselInner.css("margin-left", "0");
+            $(".carousel-item:first").appendTo($carouselInner);
+          }
+        );
+      }
+
+      setInterval(nextSlide, 3000);
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+  var searchBtn = document.getElementById("search-btn");
+  var searchInput = document.getElementById("search-input");
+  
+  searchBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+    performSearch();
+  });
+  
+  searchInput.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      performSearch();
+    }
+  });
+  
+  function performSearch() {
+    var searchTerm = searchInput.value;
+    console.log("Tìm kiếm: " + searchTerm);
+    // Thực hiện các hành động tìm kiếm khác tại đây
+    }
+  });
+  const cartButton = document.getElementById('cartIcon');
+  cartButton.addEventListener('click', () => {
+    console.log('Nút giỏ hàng được bấm!');
+  });
+
+  const navbarToggle = document.querySelector('.navbar-toggle');
+  const navbarMenu = document.querySelector('.navbar-nav');
+
+  
+
+
+
+
+   
+
+    function redirectToCart() {
+        window.location.href = "/user/gio-hang";
+    }
+    // Khai báo biến đếm cho số lượng sản phẩm đã hiển thị
+    var displayedCount = 12;
+
+    // Lấy ra danh sách tất cả các sản phẩm
+    var allBooks = document.querySelectorAll('.book');
+
+    // Ẩn tất cả các sản phẩm
+    allBooks.forEach(function(book) {
+        book.style.display = 'none';
+    });
+
+    // Hiển thị các sản phẩm đầu tiên (12 sản phẩm)
+    for (var i = 0; i < displayedCount; i++) {
+        allBooks[i].style.display = 'block';
+    }
+
+    // Xử lý sự kiện khi nhấn vào nút "Xem thêm sản phẩm"
+    document.getElementById('loadMoreButton').addEventListener('click', function() {
+        // Hiển thị thêm 8 sản phẩm mỗi lần
+        for (var i = displayedCount; i < displayedCount + 8 && i < allBooks.length; i++) {
+            allBooks[i].style.display = 'block';
+        }
+
+        // Tăng số lượng sản phẩm đã hiển thị
+        displayedCount += 8;
+
+        // Ẩn nút "Xem thêm sản phẩm" nếu đã hiển thị hết tất cả sản phẩm
+        if (displayedCount >= allBooks.length) {
+            document.getElementById('loadMoreButton').style.display = 'none';
+        }
+    });
+</script>
+</body>
+</html>
